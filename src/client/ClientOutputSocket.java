@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class ClientOutputSocket implements Runnable {
 
@@ -23,11 +24,12 @@ public class ClientOutputSocket implements Runnable {
 	
 	@Override
 	public void run() {
-		Socket clientSocket = null;
 		boolean connexionClose = false;
 		
+		Socket clientSocket = null;
 		OutputStream output = null;
-
+		
+		Scanner keyboard = new Scanner(System.in);
 		
 		try{
 			clientSocket = new Socket(ip, port);
@@ -41,7 +43,11 @@ public class ClientOutputSocket implements Runnable {
 		int i = 0;
 		
 		while(!connexionClose){
-			String data = "test"+i;
+			String data = keyboard.nextLine();
+			
+			if(data.isEmpty()){
+				continue;
+			}
 			
 			try{
 				output = clientSocket.getOutputStream();
@@ -50,10 +56,10 @@ public class ClientOutputSocket implements Runnable {
 				System.out.println(e);
 			}
 			
-			i++;
-			
-			if(i == 100){
+
+			if(data.equals("bye bye")){
 				connexionClose = true;
+				inputSocket.closeConnexion();
 			}
 		}
 		

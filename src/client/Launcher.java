@@ -6,7 +6,7 @@ import java.net.UnknownHostException;
 public class Launcher {
 	
 	private final static String IP_ADDRESS = "10.196.115.198";
-	private final static int PORT = 46876;
+	private final static int PORT = 40444;
 	
 	public static void main(String [ ] args)
 	{

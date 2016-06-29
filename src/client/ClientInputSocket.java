@@ -21,36 +21,28 @@ public class ClientInputSocket implements Runnable {
 		thread.start();
 	}
 	
+	public void closeConnexion(){
+		connexionClose = true;
+	}
+	
 	@Override
 	public void run() {
-		
-		InputStream input = null;
-		
-		try{
-			input = socket.getInputStream();
-		} catch (IOException e){
-			System.out.println(e);
-		}
 		
 		while(!connexionClose){
 			byte[] buffer = new byte[MAX_LENGHT];
 			
 			try{
-				input = socket.getInputStream();
+				InputStream input = socket.getInputStream();
 				input.read(buffer);
 			} catch (IOException e){
+				connexionClose = true;
 				System.out.println(e);
 			}
 
 			String stringReceived = new String (buffer);
 			System.out.println(stringReceived);
 		}
-		
-		try {
-			input.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	
 	}
 
 }
