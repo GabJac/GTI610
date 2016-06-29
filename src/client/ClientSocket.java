@@ -45,9 +45,15 @@ public class ClientSocket implements Runnable {
 			
 			i++;
 			
-			if(i == 50){
+			if(i == 100){
 				connexionClose = true;
 			}
+		}
+		
+		try {
+			clientSocket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 

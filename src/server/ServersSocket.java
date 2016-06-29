@@ -24,7 +24,6 @@ public class ServersSocket implements Runnable {
 			
 		boolean connexionClose = false;
 		Socket socket = null;
-		byte[] buffer = new byte[MAX_LENGHT];
 		
 		try {
 			ServerSocket serveurSocket = new ServerSocket(port);
@@ -34,16 +33,29 @@ public class ServersSocket implements Runnable {
 		}
 		
 		while(!connexionClose){
+			
+			byte[] buffer = new byte[MAX_LENGHT];
+			
 			try{
 				InputStream input = socket.getInputStream();
 				input.read(buffer);
 			} catch (IOException e){
 				System.out.println(e);
 			}
-			System.out.println("************");
-			System.out.println(buffer);
-			System.out.println("******toString******");
-			System.out.println(buffer.toString());
+
+			String received = new String (buffer);
+			System.out.println(received);
+
+			if(received.equals(-1)){
+				System.out.println("closing!!!!!");
+				connexionClose = true;
+			}
+		}
+		
+		try {
+			socket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
