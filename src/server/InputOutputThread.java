@@ -23,16 +23,17 @@ public class InputOutputThread implements Runnable{
 	@Override
 	public void run() {
 		boolean connexionClose = false;
-		InputStream input = null;
-		OutputStream output = null;
-		try {
-			input = socket.getInputStream();
-			output = socket.getOutputStream();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
 
 		while(!connexionClose){
+			
+			InputStream input = null;
+			OutputStream output = null;
+			try {
+				input = socket.getInputStream();
+				output = socket.getOutputStream();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			
 			byte[] buffer = new byte[MAX_LENGHT];
 			
@@ -40,28 +41,26 @@ public class InputOutputThread implements Runnable{
 				input = socket.getInputStream();
 				input.read(buffer);
 			} catch (IOException e){
-				System.out.println(e);
+				connexionClose = true;
 			}
 
+			String ipPort =  " ipv4: " + socket.getInetAddress().getHostAddress() +
+					" port: " + socket.getPort();
 			String stringReceived = new String (buffer);
-			System.out.println(stringReceived + " ipv4: " + socket.getInetAddress().getHostAddress() +
-					" port: " + socket.getPort());
+			
+			System.out.println(stringReceived.concat(ipPort));
 
 			
 			try{
 				output.write(stringReceived.toUpperCase().getBytes());
-			} catch (ConnectException  e) {
-				connexionClose = true;
-				System.out.println(e);
 			} catch (IOException e) {
-				System.out.println(e);
+				connexionClose = true;
 			}
 		}
 		
 		try {
 			socket.close();
-			input.close();
-			output.close();
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}		

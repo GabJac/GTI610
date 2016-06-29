@@ -2,6 +2,7 @@ package server;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -20,11 +21,19 @@ public class ServersSocket implements Runnable {
 	
 	@Override
 	public void run() {
+		ServerSocket serveurSocket = null;
+		try {
+			serveurSocket = new ServerSocket();
+			serveurSocket.setReuseAddress(true);
+			serveurSocket.bind(new InetSocketAddress(port));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
 		while(true){
 			Socket socket = null;
 			
 			try {
-				ServerSocket serveurSocket = new ServerSocket(port);
 				socket = serveurSocket.accept();
 			} catch (IOException e) {
 				e.printStackTrace();
