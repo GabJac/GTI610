@@ -44,15 +44,13 @@ public class InputOutputThread implements Runnable{
 				connexionClose = true;
 			}
 
-			String ipPort =  " ipv4: " + socket.getInetAddress().getHostAddress() +
+			String message = new String (buffer) + " ipv4: " + socket.getInetAddress().getHostAddress() +
 					" port: " + socket.getPort();
-			String stringReceived = new String (buffer);
-			
-			System.out.println(stringReceived.concat(ipPort));
+			System.out.println(message);
 
 			
 			try{
-				output.write(stringReceived.toUpperCase().getBytes());
+				output.write(new String (buffer).toUpperCase().getBytes());
 			} catch (IOException e) {
 				connexionClose = true;
 			}

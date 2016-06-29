@@ -2,7 +2,7 @@ package server;
 
 public class Launcher {
 
-	private final static int PORT = 41444;
+	private final static int PORT = 40444;
 	
 	public static void main(String [ ] args)
 	{

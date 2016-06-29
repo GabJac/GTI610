@@ -22,15 +22,18 @@ public class ServersSocket implements Runnable {
 	@Override
 	public void run() {
 		ServerSocket serveurSocket = null;
+		boolean start = true;
+		
 		try {
 			serveurSocket = new ServerSocket();
 			serveurSocket.setReuseAddress(true);
 			serveurSocket.bind(new InetSocketAddress(port));
 		} catch (IOException e1) {
+			start = false;
 			e1.printStackTrace();
 		}
 
-		while(true){
+		while(start){
 			Socket socket = null;
 			
 			try {
