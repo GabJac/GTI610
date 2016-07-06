@@ -49,17 +49,17 @@ public class ClientOutputSocket implements Runnable {
 				continue;
 			}
 			
-			try{
-				output = clientSocket.getOutputStream();
-				output.write(data.getBytes());
-			} catch (IOException e) {
-				System.out.println(e);
-			}
-			
 
-			if(data.equals("bye bye")){
+			if(data.equals("close the connection")){
 				connexionClose = true;
 				inputSocket.closeConnexion();
+			} else {
+				try{
+					output = clientSocket.getOutputStream();
+					output.write(data.getBytes());
+				} catch (IOException e) {
+					System.out.println(e);
+				}
 			}
 		}
 		

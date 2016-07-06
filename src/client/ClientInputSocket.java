@@ -36,7 +36,6 @@ public class ClientInputSocket implements Runnable {
 				input.read(buffer);
 			} catch (IOException e){
 				connexionClose = true;
-				System.out.println(e);
 			}
 
 			String stringReceived = new String (buffer);
