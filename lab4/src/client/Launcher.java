@@ -18,7 +18,7 @@ public class Launcher {
 			e.printStackTrace();
 		}
 		
-		ClientOutputSocket socket = new ClientOutputSocket(iNet, PORT);
+		ClientOutputThread socket = new ClientOutputThread(iNet, PORT);
 		socket.launchClient();
 	}
 	

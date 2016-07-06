@@ -43,7 +43,7 @@ public class ServersSocket implements Runnable {
 			}
 			
 			if(socket != null){
-				InputOutputThread inputOutputThread = new InputOutputThread(socket);
+				ServerInputOutputThread inputOutputThread = new ServerInputOutputThread(socket);
 				inputOutputThread.start();
 			}
 		}

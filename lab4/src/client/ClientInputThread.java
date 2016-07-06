@@ -4,14 +4,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 
-public class ClientInputSocket implements Runnable {
+public class ClientInputThread implements Runnable {
 	
 	private final static int MAX_LENGHT = 256;
 
 	private Socket socket;
 	private boolean connexionClose;
 	
-	public ClientInputSocket(Socket socket){
+	public ClientInputThread(Socket socket){
 		this.socket = socket;
 		connexionClose = false;
 	}

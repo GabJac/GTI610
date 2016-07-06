@@ -6,12 +6,12 @@ import java.io.OutputStream;
 import java.net.ConnectException;
 import java.net.Socket;
 
-public class InputOutputThread implements Runnable{
+public class ServerInputOutputThread implements Runnable{
 	
 	private final static int MAX_LENGHT = 256;
 	private Socket socket;
 	
-	public InputOutputThread(Socket socket){
+	public ServerInputOutputThread(Socket socket){
 		this.socket = socket;
 	}
 	

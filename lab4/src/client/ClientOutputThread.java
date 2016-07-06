@@ -7,12 +7,12 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class ClientOutputSocket implements Runnable {
+public class ClientOutputThread implements Runnable {
 
 	private InetAddress ip;
 	private int port;
 	
-	public ClientOutputSocket(InetAddress ip, int port){
+	public ClientOutputThread(InetAddress ip, int port){
 		this.ip = ip;
 		this.port = port;
 	}
@@ -37,7 +37,7 @@ public class ClientOutputSocket implements Runnable {
 			System.out.println(e);
 		}
 		
-		ClientInputSocket inputSocket = new ClientInputSocket(clientSocket);
+		ClientInputThread inputSocket = new ClientInputThread(clientSocket);
 		inputSocket.start();
 		
 		int i = 0;
